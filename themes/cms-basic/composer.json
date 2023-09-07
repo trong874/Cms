@@ -1,0 +1,23 @@
+{
+    "name": "byteplatform/theme-cms",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nguyen Van Hau",
+            "email": "nguyenvanhaudev@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": ["BytePlatform\\ThemeCms\\CmsServiceProvider"],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "BytePlatform\\ThemeCms\\": "src",
+            "BytePlatform\\ThemeCms\\Database\\Factories\\": "database/factories",
+            "BytePlatform\\ThemeCms\\Database\\Seeders\\": "database/seeders"
+        }
+    }
+}
