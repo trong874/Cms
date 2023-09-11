@@ -55,16 +55,16 @@ class PostCrud extends CrudManager
             Item::Add('tags')
                 ->Column(Item::Col12)
                 ->Title('Tags')
-                ->Type('tags')
+                ->Type('tagify')
                 ->Required(),
             Item::Add('is_featured')
                 ->Column(Item::Col12)
                 ->Title('Is Featured')
                 ->Type('toggle')
-                ->DataOption(function(){
+                ->DataOption(function () {
                     return [
-                        'value'=>1,
-                        'text'=>''
+                        'value' => 1,
+                        'text' => ''
                     ];
                 })
                 ->Required(),
@@ -133,7 +133,11 @@ class PostCrud extends CrudManager
                 return [
                     Button::Create("Create Post")->ButtonType(function () {
                         return 'primary';
-                    })->ModalUrl(function ($button) {
+                    })
+                    // ->ButtonLink(function () {
+                    //     return route('admin.post-form');
+                    // })
+                    ->ModalUrl(function ($button) {
                         return route('admin.post-form');
                     })->ModalTitle('Create Post')->ModalSize('modal-fullscreen-xl-down modal-xl')
                 ];
@@ -166,6 +170,7 @@ class PostCrud extends CrudManager
     public function FormPage()
     {
         return ItemManager::Form()
+            // ->useMethodGet()
             ->Model($this->GetModel())
             ->BeforeFormDoSave(function ($model) {
                 $model->author_id = auth()->user()->id;
