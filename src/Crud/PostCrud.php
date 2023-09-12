@@ -134,12 +134,12 @@ class PostCrud extends CrudManager
                     Button::Create("Create Post")->ButtonType(function () {
                         return 'primary';
                     })
-                    // ->ButtonLink(function () {
-                    //     return route('admin.post-form');
-                    // })
-                    ->ModalUrl(function ($button) {
+                    ->ButtonLink(function () {
                         return route('admin.post-form');
-                    })->ModalTitle('Create Post')->ModalSize('modal-fullscreen-xl-down modal-xl')
+                    })
+                    // ->ModalUrl(function ($button) {
+                    //     return route('admin.post-form');
+                    // })->ModalTitle('Create Post')->ModalSize('modal-fullscreen-xl-down modal-xl')
                 ];
             })
             ->ButtonInTable(function () {
@@ -170,13 +170,13 @@ class PostCrud extends CrudManager
     public function FormPage()
     {
         return ItemManager::Form()
-            // ->useMethodGet()
+            ->useMethodGet()
             ->Model($this->GetModel())
             ->BeforeFormDoSave(function ($model) {
                 $model->author_id = auth()->user()->id;
                 return $model;
             })
-            ->Title('Role Form')
+            ->Title('Post Form')
             ->Layout([
                 ['key' => 'column1', 'class' => '', 'column' => Item::Col9],
                 ['key' => 'column2', 'class' => '', 'column' => Item::Col3]
