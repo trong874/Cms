@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use WithSlug, WithComments,WithTranslation;
+    use WithSlug, WithComments, WithTranslation;
 }

@@ -97,7 +97,7 @@ class CatalogCrud extends CrudManager
     {
         return ItemManager::Form()
             ->Model($this->GetModel())
-            ->BeforeFormDoSave(function ($model) {
+            ->BeforeSave(function ($model) {
                 $model->author_id = auth()->user()->id;
                 return $model;
             })
