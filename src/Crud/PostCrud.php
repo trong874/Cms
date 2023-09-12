@@ -8,6 +8,7 @@ use BytePlatform\Cms\Models\Post;
 use BytePlatform\CrudManager;
 use BytePlatform\Item;
 use BytePlatform\ItemManager;
+use Illuminate\Support\Facades\Log;
 
 class PostCrud extends CrudManager
 {
@@ -21,13 +22,14 @@ class PostCrud extends CrudManager
             Item::Add('id')->Title('ID')
                 ->DisableFilter()
                 ->DisableSort()
+                ->NoBindData()
                 ->When(function ($item, $manager) {
                     return $manager->IsTable();
                 })->DisableEdit(),
             Item::Add('name')
                 ->Layout('column1')
                 ->Column(Item::Col12)
-                ->Title('Name')->Required(),
+                ->Title('Title')->Required(),
             Item::Add('slug')
                 ->Title('Slug')
                 ->When(function ($item, $manager) {
@@ -45,33 +47,46 @@ class PostCrud extends CrudManager
             Item::Add('published_at')
                 ->Column(Item::Col12)
                 ->Title('Published At')
-                ->Type('datetime')
-                ->Required(),
+                ->Type('flatpickr')
+                ->ValueDefault(function () {
+                    return now();
+                })
+                ->When(function ($item, $manager) {
+                    return !$manager->IsTable();
+                }),
             Item::Add('description')
                 ->Column(Item::Col12)
                 ->Title('Description')
                 ->Type('textarea')
-                ->Required(),
+                ->When(function ($item, $manager) {
+                    return !$manager->IsTable();
+                }),
             Item::Add('tags')
                 ->Column(Item::Col12)
                 ->Title('Tags')
-                ->Type('tags')
-                ->Required(),
+                ->Type('tagify')
+                ->NoBindData()
+                ->When(function ($item, $manager) {
+                    return !$manager->IsTable();
+                }),
             Item::Add('is_featured')
                 ->Column(Item::Col12)
                 ->Title('Is Featured')
                 ->Type('toggle')
-                ->DataOption(function(){
+                ->ValueDefault(0)
+                ->DataOption(function () {
                     return [
-                        'value'=>1,
-                        'text'=>''
+                        'value' => 1,
+                        'text' => ''
                     ];
-                })
-                ->Required(),
+                })->When(function ($item, $manager) {
+                    return !$manager->IsTable();
+                }),
             Item::Add('status')
                 ->Column(Item::Col12)
                 ->Title('Status')
                 ->DataOptionStatus()
+                ->ValueDefault(0)
                 ->DataText(function (Item $item) {
                     $button = $item->ConvertToButton()
                         ->Title(function ($button) {
@@ -96,6 +111,7 @@ class PostCrud extends CrudManager
                 ->Column(Item::Col12)
                 ->Type('select')
                 ->Title('Categories')
+                ->NoBindData()
                 ->DataOption(function () {
                     return Catalog::all()->map(function ($item) {
                         return [
@@ -103,7 +119,9 @@ class PostCrud extends CrudManager
                             'text' => $item->name
                         ];
                     });
-                })->DataOptionNone(),
+                })->DataOptionNone()->When(function ($item, $manager) {
+                    return !$manager->IsTable();
+                }),
             Item::Add('image')
                 ->Column(Item::Col12)
                 ->Type('images')
@@ -115,7 +133,9 @@ class PostCrud extends CrudManager
                             'text' => $item->name
                         ];
                     });
-                })->DataOptionNone(),
+                })->DataOptionNone()->When(function ($item, $manager) {
+                    return !$manager->IsTable();
+                }),
 
         ];
     }
@@ -133,9 +153,13 @@ class PostCrud extends CrudManager
                 return [
                     Button::Create("Create Post")->ButtonType(function () {
                         return 'primary';
-                    })->ModalUrl(function ($button) {
-                        return route('admin.post-form');
-                    })->ModalTitle('Create Post')->ModalSize('modal-fullscreen-xl-down modal-xl')
+                    })
+                        // ->ButtonLink(function () {
+                        //     return route('admin.post-form');
+                        // })
+                        ->ModalUrl(function ($button) {
+                            return route('admin.post-form');
+                        })->ModalTitle('Create Post')->ModalSize('modal-fullscreen-xl-down modal-xl')
                 ];
             })
             ->ButtonInTable(function () {
@@ -166,12 +190,19 @@ class PostCrud extends CrudManager
     public function FormPage()
     {
         return ItemManager::Form()
+            // ->useMethodGet()
             ->Model($this->GetModel())
-            ->BeforeFormDoSave(function ($model) {
+            ->BeforeSave(function ($model) {
                 $model->author_id = auth()->user()->id;
                 return $model;
             })
-            ->Title('Role Form')
+            ->AfterSave(function ($model, $manager) {
+                //TODO:TAGS
+                Log::info($manager->getData()->tags);
+
+                return $model;
+            })
+            ->Title('Post Form')
             ->Layout([
                 ['key' => 'column1', 'class' => '', 'column' => Item::Col9],
                 ['key' => 'column2', 'class' => '', 'column' => Item::Col3]

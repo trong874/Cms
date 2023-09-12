@@ -14,8 +14,8 @@ class CmsServiceProvider extends ServiceProvider
 
     public function configurePackage(ServicePackage $package): void
     {
-        add_filter(BYTE_URL_ADMIN, function () {
-            return "admincp";
+        add_filter(BYTE_URL_ADMIN, function ($prev) {
+            return $prev ? $prev : "admincp";
         });
         /*
          * This class is a Package Service Provider
