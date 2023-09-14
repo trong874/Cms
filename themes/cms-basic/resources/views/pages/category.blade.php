@@ -5,124 +5,24 @@
 
       <div class="row">
         <div class="col-md-9">
-
-          <div class="text-center">
-            <span class="text-muted">Category:</span>
-            <h2>Lifestyle</h2>
-            <hr />
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-
-              <article class="card mb-4">
-                <header class="card-header">
-                  <div class="card-meta">
-                    <a href="#"><time class="timeago" datetime="2021-09-15 20:00">15 october 2021</time></a> in <a  href="{{ route('post-category') }}" wire:navigate>Lifestyle</a>
-                  </div>
-                  <a href="post-image.html">
-                    <h4 class="card-title">The king is made of paper</h4>
-                  </a>
-                </header>
-                <a href="post-image.html">
-                  <img class="card-img" src="/platform/themes/Cms/img/articles/5.jpg" alt="" />
-                </a>
-                <div class="card-body">
-                  <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-                </div>
-              </article><!-- /.card -->
-
-              <article class="card mb-4">
-                <header class="card-header">
-                  <div class="card-meta">
-                    <a href="#"><time class="timeago" datetime="2021-08-24 20:00">24 august 2021</time></a> in <a  href="{{ route('post-category') }}" wire:navigate>Lifestyle</a>
-                  </div>
-                  <a href="post-image.html">
-                    <h4 class="card-title">Crying on the news</h4>
-                  </a>
-                </header>
-                <a href="post-image.html">
-                  <img class="card-img" src="/platform/themes/Cms/img/articles/13.jpg" alt="" />
-                </a>
-                <div class="card-body">
-                  <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-                </div>
-              </article><!-- /.card -->
-
-              <article class="card mb-4">
-                <header class="card-header">
-                  <div class="card-meta">
-                    <a href="#"><time class="timeago" datetime="2021-05-08 20:00">8 may 2021</time></a> in <a  href="{{ route('post-category') }}" wire:navigate>Lifestyle</a>
-                  </div>
-                  <a href="post-image.html">
-                    <h4 class="card-title">How can you not sing about love?</h4>
-                  </a>
-                </header>
-                <a href="post-image.html">
-                  <img class="card-img" src="/platform/themes/Cms/img/articles/1.jpg" alt="" />
-                </a>
-                <div class="card-body">
-                  <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-                </div>
-              </article><!-- /.card -->
-
+          @foreach ($posts as $item)
+          <article class="card mb-4">
+            <header class="card-header">
+              <div class="card-meta">
+                <a href="#"><time class="timeago" datetime="2021-09-26 20:00">26 october 2021</time></a>
+              </div>
+              <a href="{{ route('post-detail',$item->slug) }}"  wire:navigate>
+                <h4 class="card-title">{{ $item->name }}</h4>
+              </a>
+            </header>
+            <a href="{{ route('post-detail',$item->slug) }}" wire:navigate>
+              <img class="card-img" src="{{ $item->image }}" alt="" />
+            </a>
+            <div class="card-body">
+              <p class="card-text">{{ $item->description }}</p>
             </div>
-            <div class="col-md-6">
-
-              <article class="card mb-4">
-                <header class="card-header">
-                  <div class="card-meta">
-                    <a href="#"><time class="timeago" datetime="2021-09-26 20:00">26 october 2021</time></a> in <a  href="{{ route('post-category') }}" wire:navigate>Lifestyle</a>
-                  </div>
-                  <a href="post-image.html">
-                    <h4 class="card-title">How can we sing about love?</h4>
-                  </a>
-                </header>
-                <a href="post-image.html">
-                  <img class="card-img" src="/platform/themes/Cms/img/articles/3.jpg" alt="" />
-                </a>
-                <div class="card-body">
-                  <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-                </div>
-              </article><!-- /.card -->
-
-              <article class="card mb-4">
-                <header class="card-header">
-                  <div class="card-meta">
-                    <a href="#"><time class="timeago" datetime="2021-09-03 20:00">3 october 2021</time></a> in <a  href="{{ route('post-category') }}" wire:navigate>Lifestyle</a>
-                  </div>
-                  <a href="post-image.html">
-                    <h4 class="card-title">Oh, I guess they have the blues</h4>
-                  </a>
-                </header>
-                <a href="post-image.html">
-                  <img class="card-img" src="/platform/themes/Cms/img/articles/18.jpg" alt="" />
-                </a>
-                <div class="card-body">
-                  <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-                </div>
-              </article><!-- /.card -->
-
-              <article class="card mb-4">
-                <header class="card-header">
-                  <div class="card-meta">
-                    <a href="#"><time class="timeago" datetime="2021-07-16 20:00">16 july 2021</time></a> in <a  href="{{ route('post-category') }}" wire:navigate>Lifestyle</a>
-                  </div>
-                  <a href="post-image.html">
-                    <h4 class="card-title">How can we, how can we sing about ourselves?</h4>
-                  </a>
-                </header>
-                <a href="post-image.html">
-                  <img class="card-img" src="/platform/themes/Cms/img/articles/12.jpg" alt="" />
-                </a>
-                <div class="card-body">
-                  <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
-                </div>
-              </article><!-- /.card -->
-
-            </div>
-          </div>
-
+          </article><!-- /.card -->
+          @endforeach
         </div>
         <div class="col-md-3 ms-auto">
 
@@ -139,11 +39,11 @@
             <div class="card mb-4">
               <div class="card-body">
                 <h4 class="card-title">Tags</h4>
-                <a class="btn btn-light btn-sm mb-1"  href="{{ route('post-category') }}" wire:navigate>Journey</a>
-                <a class="btn btn-light btn-sm mb-1"  href="{{ route('post-category') }}" wire:navigate>Work</a>
-                <a class="btn btn-light btn-sm mb-1"  href="{{ route('post-category') }}" wire:navigate>Lifestype</a>
-                <a class="btn btn-light btn-sm mb-1"  href="{{ route('post-category') }}" wire:navigate>Photography</a>
-                <a class="btn btn-light btn-sm mb-1"  href="{{ route('post-category') }}" wire:navigate>Food & Drinks</a>
+                <a class="btn btn-light btn-sm mb-1" href="page-category.html">Journey</a>
+                <a class="btn btn-light btn-sm mb-1" href="page-category.html">Work</a>
+                <a class="btn btn-light btn-sm mb-1" href="page-category.html">Lifestype</a>
+                <a class="btn btn-light btn-sm mb-1" href="page-category.html">Photography</a>
+                <a class="btn btn-light btn-sm mb-1" href="page-category.html">Food & Drinks</a>
               </div>
             </div><!-- /.card -->
             <div class="card mb-4">
@@ -158,7 +58,7 @@
 
                 <a href="post-image.html" class="d-inline-block mt-3">
                   <h4 class="h6">Crying on the news</h4>
-                  <img class="card-img" src="/platform/themes/Cms/img/articles/22.jpg" alt="" />
+                  <img class="card-img" src="/platform/themes/Cms/img/articles/3.jpg" alt="" />
                 </a>
                 <time class="timeago" datetime="2021-07-16 20:00">16 july 2021</time> in Work
 

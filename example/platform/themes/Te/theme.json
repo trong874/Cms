@@ -1,0 +1,14 @@
+{
+    "id":"theme-te-5e7b706a-d474-4530-b76c-20e9765152c78194134",
+    "name": "Te",
+    "version":"v1.0.0",
+    "alias": "te",
+    "description": "",
+    "keywords": [],
+    "priority": 200,
+    "aliases": {},
+    "namespace":"ByteTheme\\Te",
+    "locations": [],
+    "layout":"",
+    "requires": []
+}

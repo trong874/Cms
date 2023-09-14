@@ -19,6 +19,7 @@ use BytePlatform\ThemeCms\Livewire\Modal;
 use BytePlatform\ThemeCms\Livewire\Offcanvas;
 use BytePlatform\ThemeCms\Livewire\Pagination;
 use BytePlatform\ThemeCms\Livewire\PostCategory;
+use BytePlatform\ThemeCms\Livewire\PostDetail;
 use BytePlatform\ThemeCms\Livewire\PostImage;
 use BytePlatform\ThemeCms\Livewire\PostVideo;
 use BytePlatform\ThemeCms\Livewire\Table;
@@ -48,6 +49,6 @@ Route::get('/home-fourcolumm', route_theme(HomeFourcolumn::class))->name('home-f
 Route::get('/home-threecolumn', route_theme(HomeThreecolumn::class))->name('home-threecolumn');
 Route::get('/home-twocolumn', route_theme(HomeTwocolumn::class))->name('home-twocolumn');
 Route::get('/home-onecolumn', route_theme(HomeOnecolumn::class))->name('home-onecolumn');
-Route::get('/post-image', route_theme(PostImage::class))->name('post-image');
 Route::get('/post-video', route_theme(PostVideo::class))->name('post-video');
 Route::get('/post-category', route_theme(PostCategory::class))->name('post-category');
+Route::get('/post/{post}', route_theme(PostDetail::class))->name('post-detail');
