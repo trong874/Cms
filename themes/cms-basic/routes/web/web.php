@@ -20,7 +20,6 @@ use BytePlatform\ThemeCms\Livewire\Offcanvas;
 use BytePlatform\ThemeCms\Livewire\Pagination;
 use BytePlatform\ThemeCms\Livewire\PostCategory;
 use BytePlatform\ThemeCms\Livewire\PostDetail;
-use BytePlatform\ThemeCms\Livewire\PostImage;
 use BytePlatform\ThemeCms\Livewire\PostVideo;
 use BytePlatform\ThemeCms\Livewire\Table;
 use BytePlatform\ThemeCms\Livewire\Typography;
